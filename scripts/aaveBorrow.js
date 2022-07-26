@@ -1,3 +1,8 @@
+/**
+ * @notice This project uses Aave smart contracts to deposit collateral, borrow against that collateral,
+ * and then repay the initial amount borrowed. Chainlink oracles are used for price feeds.
+ */
+
 const { getNamedAccounts, ethers, network } = require("hardhat")
 const { networkConfig } = require("../helper-hardhat-config")
 const { getWeth, AMOUNT } = require("../scripts/getWeth")
@@ -35,6 +40,10 @@ async function main() {
     )
     await getBorrowUserData(lendingPool, deployer)
 }
+
+/**
+ * @dev Repays the initial Dai borrowed.
+ */
 
 async function repay(amount, daiAddress, lendingPool, account) {
     await approveErc20(daiAddress, lendingPool.address, amount, account)
